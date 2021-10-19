@@ -1,11 +1,14 @@
 package dad.iniciosesion;
 
+import java.util.Optional;
+
 import dad.login.*;
 import dad.login.auth.AuthService;
 import dad.login.auth.FileAuthService;
 import dad.login.auth.LdapAuthService;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 
 public class InicioController {
@@ -34,18 +37,25 @@ public class InicioController {
 	}
 
 	// listeners
-
+	
 	private void onCancelarAction(ActionEvent e) {
-		System.exit(0);
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("¿Seguro?");
+		alert.setHeaderText("Cuidado, vas a salir");
+		alert.setContentText("¿Seguro que quieres salir?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			System.exit(0);
+		}
 	}
 
 	private void onAccederAction(ActionEvent e) {
-		boolean useLdap = true;
-
-		AuthService ldap = useLdap ? new LdapAuthService() : new FileAuthService();
+		
+		AuthService ldap = view.getLDAPCheck().isSelected() ? new LdapAuthService() : new FileAuthService();
 
 		try {
-			if (ldap.login(model.getUsuarioProperty(), model.getPasswordProperty()) == true) {
+			if (ldap.login(model.getUsuarioProperty(), model.getPasswordProperty()) == true ) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Iniciar sesión");
 				alert.setHeaderText("Acceso permitido");
