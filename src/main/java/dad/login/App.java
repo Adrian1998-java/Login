@@ -14,7 +14,7 @@ public class App extends Application {
 		
 		InicioController controlador = new InicioController();
 
-		Scene scene = new Scene(controlador.getView());
+		Scene scene = new Scene(controlador.getView(), 320, 120);
 		
 		primaryStage.setTitle("Inicio Sesión");
 		primaryStage.setScene(scene);
