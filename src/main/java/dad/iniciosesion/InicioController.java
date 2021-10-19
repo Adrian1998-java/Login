@@ -31,9 +31,11 @@ public class InicioController {
 	//listeners
 			
 	private void onCancelarAction(ActionEvent e) {
+		System.exit(0);
 	}
 
 	private void onAccederAction(ActionEvent e) {
+		
 
 	}
 }
