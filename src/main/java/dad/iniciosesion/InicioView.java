@@ -26,21 +26,24 @@ public class InicioView extends VBox {
 		passwrdText = new PasswordField();
 		
 		accederButton = new Button("Acceder");
-		
+		accederButton.setDefaultButton(true);
 		cancelarButton = new Button("Cancelar");
 		
 		HBox boxUno = new HBox();
 		boxUno.setAlignment(Pos.CENTER);
+		boxUno.setSpacing(5);
 		boxUno.setPadding(new Insets(5));
-		boxUno.getChildren().addAll(new Label("Usuario"), usuarioText);
+		boxUno.getChildren().addAll(new Label("Usuario : "), usuarioText);
 		
 		HBox boxDos = new HBox();
 		boxDos.setAlignment(Pos.CENTER);
+		boxDos.setSpacing(5);
 		boxDos.setPadding(new Insets(5));
-		boxDos.getChildren().addAll(new Label("Contraseña"), passwrdText);
+		boxDos.getChildren().addAll(new Label("Contraseña : "), passwrdText);
 		
 		HBox boxTres = new HBox();
 		boxTres.setAlignment(Pos.CENTER);
+		boxTres.setSpacing(5);
 		boxTres.setPadding(new Insets(5));
 		boxTres.getChildren().addAll(accederButton, cancelarButton);
 		
