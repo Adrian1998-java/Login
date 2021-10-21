@@ -28,7 +28,11 @@ public class InicioView extends GridPane {
 		super();
 		
 		usuarioText = new TextField();
+		usuarioText.setMaxWidth(150);
+		usuarioText.setAlignment(Pos.BASELINE_LEFT);
 		passwrdText = new PasswordField();
+		passwrdText.setMaxWidth(150);
+		passwrdText.setAlignment(Pos.BASELINE_LEFT);
 		
 		accederButton = new Button("Acceder");
 		accederButton.setDefaultButton(true);
@@ -44,6 +48,7 @@ public class InicioView extends GridPane {
 		
 		setPadding(new Insets(5));
 		setVgap(5);
+		setAlignment(Pos.CENTER);
 		addRow(0, new Label("Usuario : "), usuarioText);
 		addRow(1, new Label("Contraseña : "), passwrdText);
 		addRow(2, LDAPCheck);
@@ -55,10 +60,11 @@ public class InicioView extends GridPane {
 		};
 		getColumnConstraints().setAll(cols);
 		
-		cols[0].setHalignment(HPos.LEFT);
-		cols[0].setHgrow(Priority.NEVER);
+		cols[0].setHalignment(HPos.RIGHT);
+		cols[0].setHgrow(Priority.ALWAYS);
 		cols[0].setFillWidth(false);
 		
+		cols[1].setHalignment(HPos.LEFT);
 		cols[1].setHgrow(Priority.ALWAYS);
 		cols[1].setFillWidth(true);
 		
