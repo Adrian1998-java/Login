@@ -6,22 +6,28 @@ import dad.login.*;
 import dad.login.auth.AuthService;
 import dad.login.auth.FileAuthService;
 import dad.login.auth.LdapAuthService;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Alert.AlertType;
 
 public class InicioController {
 
 	private InicioModel model = new InicioModel();
 	private InicioView view = new InicioView();
-
+	
 	public InicioController() {
 
-		view.getUsuarioText().textProperty().bindBidirectional(model.usuarioPropertyProperty());
+		view.getUsuarioText().textProperty().bindBidirectional(model.usuarioProperty());
 
-		view.getPasswrdText().textProperty().bindBidirectional(model.passwordPropertyProperty());
-
+		view.getPasswrdText().textProperty().bindBidirectional(model.passwordProperty());
+		
+		view.getLDAPCheck().selectedProperty().bindBidirectional(model.LDAPCheckedProperty());
+		
 		view.getAccederButton().setOnAction(e -> onAccederAction(e));
 
 		view.getCancelarButton().setOnAction(e -> onCancelarAction(e));
@@ -52,7 +58,7 @@ public class InicioController {
 
 	private void onAccederAction(ActionEvent e) {
 		
-		AuthService ldap = view.getLDAPCheck().isSelected() ? new LdapAuthService() : new FileAuthService();
+		AuthService ldap = model.isLDAPChecked() ? new LdapAuthService() : new FileAuthService();
 
 		try {
 			if (ldap.login(model.getUsuarioProperty(), model.getPasswordProperty()) == true ) {
